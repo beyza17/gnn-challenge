@@ -50,7 +50,7 @@ score = min(
 
 # -----------------------------
 # 5. Output
-# -----------------------------
+# --------------------------------
 print("--- Submission Evaluation ---")
 print(f"Macro F1 Score: {score:.4f}")
 
