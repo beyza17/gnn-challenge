@@ -29,7 +29,7 @@ if len(submission) != len(truth):
 
 # -----------------------------
 # 4. Compute score
-# -----------------------------
+# -------------------------------
 # score = f1_score(
 #     truth["label"],
 #     submission["label"],
