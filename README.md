@@ -62,18 +62,19 @@ The ground truth wasn't shared here. It will be used for evaluation.
 
 ## 🛠️ Requirements
 To run this project, you need the following Python libraries:
-```text
-pandas
-numpy
-scikit-learn
-torch
-torch-geometric
-matplotlib
-networkx
 
-## Submission Rules
+- pandas
+- numpy
+- scikit-learn
+- torch
+- torch-geometric
+- matplotlib
+- networkx
 
+## 📤 Submission Rules
 - Submit exactly **one CSV file**
 - File must be named: `<github_username>.csv`
 - CSV must contain a column named `label`
-- Number of rows must match the test set
+- Number of rows must match the test set (1000 rows)
+
+## 🤓 Have a nice works!
