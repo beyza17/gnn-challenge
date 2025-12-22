@@ -1,18 +1,45 @@
+import sys
 import pandas as pd
 from sklearn.metrics import f1_score
 
-# 1. Path to your recently saved submission
-submission_file = '../submissions/submission.csv'
+# -----------------------------
+# 1. Read submission path
+# -----------------------------
+if len(sys.argv) != 2:
+    print("Usage: python scoring_script.py <github_beyza17.csv>")
+    sys.exit(1)
 
-# 2. Load your submission and the ground truth
+submission_file = sys.argv[1]
+
+# -----------------------------
+# 2. Load files
+# -----------------------------
 submission = pd.read_csv(submission_file)
-truth = pd.read_csv('../data/test_labels.csv')
+truth = pd.read_csv("data/test_labels.csv")
 
-print(f"Test labels shape: {truth.shape}")
-# 4. Compute F1 score
-# We compare the 'target' column from both dataframes
-score = f1_score(truth['label'], submission['label'], average='macro')
+# -----------------------------
+# 3. Validation
+# -----------------------------
+if "label" not in submission.columns:
+    raise ValueError("Submission must contain a 'label' column")
 
-print(f'--- Submission Evaluation ---')
-print(f"Test Accuracy: {score:.4f}")
-print(f"Test F1 Score (Macro): {score:.4f}")
+if len(submission) != len(truth):
+    raise ValueError("Submission length does not match test labels")
+
+# -----------------------------
+# 4. Compute score
+# -----------------------------
+score = f1_score(
+    truth["label"],
+    submission["label"],
+    average="macro"
+)
+
+# -----------------------------
+# 5. Output
+# -----------------------------
+print("--- Submission Evaluation ---")
+print(f"Macro F1 Score: {score:.4f}")
+
+with open("score.txt", "w") as f:
+    f.write(str(score))

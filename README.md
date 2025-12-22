@@ -71,4 +71,9 @@ torch-geometric
 matplotlib
 networkx
 
+## Submission Rules
 
+- Submit exactly **one CSV file**
+- File must be named: `<github_username>.csv`
+- CSV must contain a column named `label`
+- Number of rows must match the test set

@@ -1,0 +1,32 @@
+name: Score Submission
+
+on:
+  pull_request:
+    paths:
+      - 'submissions/*.csv'
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install pandas scikit-learn
+
+      - name: Find submitted CSV
+        id: find_csv
+        run: |
+          FILE=$(git diff --name-only origin/${{ github.base_ref }} | grep submissions/.*\.csv)
+          echo "csv_file=$FILE" >> $GITHUB_OUTPUT
+
+      - name: Run scoring
+        run: |
+          python scoring_script.py "${{ steps.find_csv.outputs.csv_file }}"

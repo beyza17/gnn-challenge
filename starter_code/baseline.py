@@ -44,6 +44,6 @@ print(f"Test features shape: {test_features.shape}")
 pd.DataFrame({
     'id': range(len(test_preds)), 
     'label': test_preds
-}).to_csv('../submissions/sample_submission.csv', index=False)
+}).to_csv('../submissions/github_beyza17.csv', index=False)
 
 print("Submission saved successfully!")
