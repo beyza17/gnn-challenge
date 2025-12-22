@@ -28,20 +28,24 @@ The dataset classifies papers into 7 distinct scientific fields:
 
 ---
 
-## Class Distribution
+## Class Distribution 
 ![alt text](image-1.png)
+![alt text](image-2.png)
 
-| Label | Category Name       | Count | Percentage (%) |
-| :--- | :---               | :---: | :---: |
-| 0    | Theory             | 81    | 12.66% |
-| 1    | Reinforcement Learning | 56  | 8.75%  |
-| 2    | Genetic Algorithms | 98    | 15.31% |
-| 3    | Neural Networks    | 178   | 27.81% |
-| 4    | Probabilistic Methods | 101 | 15.78% |
-| 5    | Case Based         | 77    | 12.03% |
-| 6    | Rule Learning      | 49    | 7.66%  |
+## Dataset Distribution
 
-**Total Instances:** 640
+| Index | Category Name       | Training Set |            | Testing Set |            |
+| :--- | :---               | :---: | :---: | :---: | :---: |
+|       |                    | **Count** | **%** | **Count** | **%** |
+| 0    | Theory             | 81    | 12.66% | 130   | 13.0% |
+| 1    | Reinforcement Learning | 56  | 8.75%  | 91    | 9.1%  |
+| 2    | Genetic Algorithms | 98    | 15.31% | 144   | 14.4% |
+| 3    | Neural Networks    | 178   | 27.81% | 319   | 31.9% |
+| 4    | Probabilistic Methods | 101 | 15.78% | 149   | 14.9% |
+| 5    | Case Based         | 77    | 12.03% | 103   | 10.3% |
+| 6    | Rule Learning      | 49    | 7.66%  | 64    | 6.4%  |
+| **Total** | | **640** | **100%** | **1000** | **100%** |
+
 
 
 
