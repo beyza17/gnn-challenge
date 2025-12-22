@@ -77,4 +77,6 @@ To run this project, you need the following Python libraries:
 - CSV must contain a column named `label`
 - Number of rows must match the test set (1000 rows)
 
+😈Your worst class performance defines your score.
+
 ## 🤓 Have a nice works!
