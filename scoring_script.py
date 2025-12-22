@@ -1,6 +1,7 @@
 import sys
 import pandas as pd
 from sklearn.metrics import f1_score
+from sklearn.metrics import classification_report
 
 # -----------------------------
 # 1. Read submission path
@@ -29,10 +30,22 @@ if len(submission) != len(truth):
 # -----------------------------
 # 4. Compute score
 # -----------------------------
-score = f1_score(
+# score = f1_score(
+#     truth["label"],
+#     submission["label"],
+#     average="macro"
+# )
+
+report = classification_report(
     truth["label"],
     submission["label"],
-    average="macro"
+    output_dict=True,
+    zero_division=0
+)
+score = min(
+    cls["f1-score"]
+    for cls in report.values()
+    if isinstance(cls, dict) and "f1-score" in cls
 )
 
 # -----------------------------
