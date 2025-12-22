@@ -1,7 +1,7 @@
 # Cora Citation Network - Node Classification
 
 This project implements a baseline classification model for the **Cora Dataset**. The approach uses a Random Forest Classifier to predict the category of scientific papers based on their word content.
-
+![alt text](image.png)
 ## 📊 Dataset Statistics
 The dataset was processed using the `Planetoid` library with the following graph properties:
 
@@ -16,17 +16,34 @@ The dataset was processed using the `Planetoid` library with the following graph
 ## 🏷️ Category Mapping
 The dataset classifies papers into 7 distinct scientific fields:
 
-| Index | Category Name |
-| :--- | :--- |
-| 0 | Theory |
-| 1 | Reinforcement Learning |
-| 2 | Genetic Algorithms |
-| 3 | Neural Networks |
-| 4 | Probabilistic Methods |
-| 5 | Case Based |
-| 6 | Rule Learning |
+| Index | Category Name       |
+| :--- | :---               |
+| 0    | Theory             |
+| 1    | Reinforcement Learning |
+| 2    | Genetic Algorithms |
+| 3    | Neural Networks    |
+| 4    | Probabilistic Methods |
+| 5    | Case Based         |
+| 6    | Rule Learning      |
 
-![alt text](image.png)
+---
+
+## Class Distribution
+![alt text](image-1.png)
+
+| Label | Category Name       | Count | Percentage (%) |
+| :--- | :---               | :---: | :---: |
+| 0    | Theory             | 81    | 12.66% |
+| 1    | Reinforcement Learning | 56  | 8.75%  |
+| 2    | Genetic Algorithms | 98    | 15.31% |
+| 3    | Neural Networks    | 178   | 27.81% |
+| 4    | Probabilistic Methods | 101 | 15.78% |
+| 5    | Case Based         | 77    | 12.03% |
+| 6    | Rule Learning      | 49    | 7.66%  |
+
+**Total Instances:** 640
+
+
 
 
 ## 📁 Data Structure
