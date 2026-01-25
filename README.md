@@ -152,7 +152,7 @@ After PR is merged:
 ### 7. Baseline Performance (validation set)
 
 
-- Min per-class F1: ~0.6
+- Min per-class F1: ~0.5
 
 Your goal: Beat the baseline! 🎯
 
