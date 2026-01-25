@@ -79,9 +79,25 @@ Your submission file must follow the exact format below:
 | 1  | 3     |
 | 2  | 2     |
 
+## 📏 Evaluation Metrics
+
+Submissions are evaluated on Minimum per-class F1-score
+The evaluation metric measures the performance of the worst-performing class in the model.
 
 
+## Baseline Approach
 
+We provide a simple baseline using Multi-output Random Forest:
+
+# Train baseline
+python starter_code/baseline.py
+
+
+Baseline Performance (validation set):
+
+    Macro F1: ~0.6
+
+Your goal: Beat the baseline! 🎯
 
 ## 🛠️ Requirements
 To run this project, you need the following Python libraries:
