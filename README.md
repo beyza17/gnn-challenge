@@ -81,8 +81,9 @@ Your submission file must follow the exact format below:
 
 ## 📏 Evaluation Metrics
 
-Submissions are evaluated on Minimum per-class F1-score
-The evaluation metric measures the performance of the worst-performing class in the model.
+Submissions are evaluated on `Minimum per-class F1-score`.
+
+- The evaluation metric measures the performance of the worst-performing class in the model.
 
 
 ## Baseline Approach
