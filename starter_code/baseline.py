@@ -40,10 +40,9 @@ test_features = test.drop(columns=[0], errors='ignore').values
 # 4. Predict
 test_preds = clf.predict(test_features)
 print(f"Test features shape: {test_features.shape}")
-# 5. Save using a generic ID (since Cora nodes don't have natural IDs in the CSV)
-pd.DataFrame({
-    'id': range(len(test_preds)), 
-    'label': test_preds
-}).to_csv('../submissions/github_beyza17.csv', index=False)
+submission_df = pd.DataFrame({'prediction': test_preds})
+
+# Save to CSV
+submission_df.to_csv('../submissions/github_beyza17.csv', index=False)
 
 print("Submission saved successfully!")

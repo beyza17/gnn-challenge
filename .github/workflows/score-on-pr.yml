@@ -25,38 +25,33 @@ jobs:
         with:
           python-version: '3.10'
 
+      # FIX 1: Added cryptography dependency
       - name: Install dependencies
-        run: pip install pandas scikit-learn
+        run: pip install pandas scikit-learn cryptography
 
       - name: Find submitted CSV
         id: find_csv
         run: |
-          # Get all CSV files in submissions/
           CSV_FILES=$(find submissions -name "*.csv" -type f)
           if [ -z "$CSV_FILES" ]; then
             echo "No CSV files found in submissions/"
             exit 1
           fi
-          
-          # Get the most recent CSV file
           CSV_FILE=$(echo "$CSV_FILES" | head -n 1)
           echo "csv_file=$CSV_FILE" >> $GITHUB_OUTPUT
           echo "Found CSV: $CSV_FILE"
 
       - name: Run scoring
         id: scoring
+        # FIX 2: Passed the secret to the environment
+        env:
+          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
         run: |
-          # Run scoring script
           python scoring_script.py "${{ steps.find_csv.outputs.csv_file }}"
           
-          # Read the score
           if [ -f "score.txt" ]; then
             SCORE=$(cat score.txt)
             echo "score=$SCORE" >> $GITHUB_OUTPUT
-            echo "Score: $SCORE"
-            
-            # Also save score to file for the merge workflow
-            echo "${{ github.event.pull_request.user.login }},$SCORE" > pr_score.txt
           else
             echo "score.txt not found!"
             exit 1
@@ -72,7 +67,6 @@ jobs:
             const score = process.env.SCORE;
             const username = process.env.USERNAME;
             
-            // Delete previous bot comments
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -89,7 +83,6 @@ jobs:
               }
             }
             
-            // Create new comment
             const comment = `🎯 **Submission Evaluated Successfully!**\n\n` +
                            `**User:** ${username}\n` +
                            `**Score:** ${score}\n\n` +
