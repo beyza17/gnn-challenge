@@ -75,7 +75,7 @@ Your submission file must follow the exact format below:
 id,label
 0,3
 1,3
-2,2
+2,2```
 
 
 
