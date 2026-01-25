@@ -52,9 +52,16 @@ The dataset classifies papers into 7 distinct scientific fields:
 
 ## 📁 Data Structure
 The processed data is exported into the following CSV files:
-- **train.csv**: Features and labels for the 640 training nodes.
-- **test.csv**: Features for the 1,000 test nodes (labels removed for blind testing).
-- **submission.csv**: The final model output in `id, label` format.
+- **`data/train.csv`**: Features and labels for the 640 training nodes.
+- **`data/test.csv`**: Features for the 1,000 test nodes (labels removed for blind testing).
+- **`submissions/github_beyza17.csv`**: The final model output in `id,label` format. **Please save your submission file as "<github_username>.csv"** (e.g., if your username is `emre123`, your file should be `submissions/github_emre123.csv`).
+
+---
+**Example Submission Format (`submissions/github_username.csv`):**
+id,label
+0,3
+1,3
+2,2
 
 The ground truth wasn't shared here. It will be used for evaluation.
 
