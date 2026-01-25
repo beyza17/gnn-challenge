@@ -1,0 +1,117 @@
+name: Auto Update Leaderboard on Merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+    paths:
+      - 'submissions/*.csv'
+
+jobs:
+  update-leaderboard:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install pandas scikit-learn
+
+      - name: Get PR info
+        id: pr_info
+        run: |
+          # Get PR author username
+          PR_AUTHOR="${{ github.event.pull_request.user.login }}"
+          echo "pr_author=$PR_AUTHOR" >> $GITHUB_OUTPUT
+          
+          # Get merge commit SHA
+          MERGE_SHA="${{ github.event.pull_request.merge_commit_sha }}"
+          echo "merge_sha=$MERGE_SHA" >> $GITHUB_OUTPUT
+          
+          echo "PR Author: $PR_AUTHOR"
+          echo "Merge SHA: $MERGE_SHA"
+
+      - name: Get submitted CSV from merged commit
+        id: find_csv
+        run: |
+          # Checkout the merged commit to get the CSV file
+          git checkout ${{ steps.pr_info.outputs.merge_sha }}
+          
+          # Find CSV files
+          CSV_FILES=$(find submissions -name "*.csv" -type f)
+          if [ -z "$CSV_FILES" ]; then
+            echo "No CSV files found in merged commit!"
+            exit 1
+          fi
+          
+          # Try to find user-specific CSV first
+          USER_CSV=$(echo "$CSV_FILES" | grep -i "${{ steps.pr_info.outputs.pr_author }}" | head -n 1)
+          
+          if [ -n "$USER_CSV" ]; then
+            CSV_FILE="$USER_CSV"
+          else
+            CSV_FILE=$(echo "$CSV_FILES" | head -n 1)
+          fi
+          
+          echo "csv_file=$CSV_FILE" >> $GITHUB_OUTPUT
+          echo "Using CSV file: $CSV_FILE"
+          
+          # Go back to main branch
+          git checkout main
+
+      - name: Run scoring (on merged submission)
+        id: scoring
+        run: |
+          # Checkout the merged commit temporarily to access the CSV
+          git checkout ${{ steps.pr_info.outputs.merge_sha }}
+          
+          # Score the submission
+          python scoring_script.py "${{ steps.find_csv.outputs.csv_file }}"
+          
+          if [ -f "score.txt" ]; then
+            SCORE=$(cat score.txt)
+            echo "score=$SCORE" >> $GITHUB_OUTPUT
+            echo "Final score: $SCORE"
+          else
+            echo "score.txt not found, defaulting to 0.0"
+            echo "score=0.0" >> $GITHUB_OUTPUT
+          fi
+          
+          # Go back to main branch
+          git checkout main
+
+      - name: Update leaderboard
+        run: |
+          echo "Updating leaderboard for github_${{ steps.pr_info.outputs.pr_author }} with score ${{ steps.scoring.outputs.score }}"
+          
+          # Update the leaderboard
+          python update_leaderboard.py "github_${{ steps.pr_info.outputs.pr_author }}" "${{ steps.scoring.outputs.score }}"
+          
+          # Configure git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Check if leaderboard was actually modified
+          if git diff --quiet leaderboard.md; then
+            echo "No changes to leaderboard (user already has same score?)"
+          else
+            # Commit and push
+            git add leaderboard.md
+            git commit -m "📊 Auto-update leaderboard: github_${{ steps.pr_info.outputs.pr_author }} - ${{ steps.scoring.outputs.score }}"
+            git push
+            
+            echo "✅ Leaderboard updated successfully!"
+          fi
