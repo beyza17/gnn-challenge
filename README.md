@@ -71,11 +71,13 @@ The processed dataset is provided in CSV format and organized as follows:
 
 Your submission file must follow the exact format below:
 
-```csv
-id,label
-0,3
-1,3
-2,2
+**Example Submission Format (`submissions/github_username.csv`):**
+
+| id | label |
+|----|-------|
+| 0  | 3     |
+| 1  | 3     |
+| 2  | 2     |
 
 
 
