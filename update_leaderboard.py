@@ -10,7 +10,7 @@ leaderboard = Path("leaderboard.md")
 if not leaderboard.exists():
     leaderboard.write_text(
         "# Leaderboard\n\n"
-        "| Rank | User | Macro F1 |\n"
+        "| Rank | User | Min F1 Score |\n"
         "|------|------|----------|\n"
     )
 
