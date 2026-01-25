@@ -1,5 +1,5 @@
 # Leaderboard
 
-| Rank | User | Macro F1 |
+| Rank | User | Min F1 Score |
 |------|------|----------|
 | 1 | github_beyza17 | 0.6027 |
