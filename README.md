@@ -14,6 +14,7 @@ The dataset was processed using the `Planetoid` library with the following graph
 * **Total Training Nodes:** 640 
 * **Training Label Rate:** 0.236
 * **Total Testing Nodes:** 1,000
+* **Total Node Features:** 1,433
 * **Testing Label Rate:** 0.369
 
 ## 🏷️ Category Mapping
