@@ -1,7 +1,8 @@
 # Cora Citation Network - Node Classification
 
 ## 🎯 Challenge Overview
-Predict the category of scientific papers in the Cora dataset using a Random Forest Classifier. Your score is determined by the **minimum per-class F1 score** - your worst-performing class defines your final rank!
+Investigating the Cora Network: Can you solve the mystery of the missing paper subjects?
+Your score is determined by the **minimum per-class F1 score** - your worst-performing class defines your final rank!
 
 ![Cora Dataset](image.png)
 ## 📊 Dataset Information
