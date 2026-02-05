@@ -150,7 +150,7 @@ After PR is merged:
 - View leaderboard: Check leaderboard.md after PR merge
 
 
-### 7. Baseline Performance (validation set)
+### 8. Baseline Performance (validation set)
 
 
 - Min per-class F1: ~0.5
